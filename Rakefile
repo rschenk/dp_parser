@@ -5,12 +5,13 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "dp_parser"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = %Q{Parses the Date Published field in Medline into a machine readable format.}
+    gem.description = %Q{There are 12 different variants in Medline's Date Published field, none of which are particularly machine readable. Even worse, many are not exact dates, but date ranges. This is a treetop grammar to make dealing with them easier. }
     gem.email = "rschenk@gmail.com"
     gem.homepage = "http://github.com/rschenk/dp_parser"
     gem.authors = ["Ryan Schenk"]
     gem.add_development_dependency "rspec"
+    gem.add_development_dependency "treetop"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
 rescue LoadError
