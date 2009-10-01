@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Ryan Schenk"]
-  s.date = %q{2009-09-30}
+  s.date = %q{2009-10-01}
   s.description = %q{There are 12 different variants in Medline's Date Published field, none of which are particularly machine readable. Even worse, many are not exact dates, but date ranges. This is a treetop grammar to make dealing with them easier.}
   s.email = %q{rschenk@gmail.com}
   s.extra_rdoc_files = [
@@ -23,6 +23,10 @@ Gem::Specification.new do |s|
      "README.rdoc",
      "Rakefile",
      "VERSION",
+     "dp_parser.gemspec",
+     "lib/date_published.rb",
+     "lib/date_published.treetop",
+     "spec/date_published_spec.rb",
      "spec/spec_helper.rb"
   ]
   s.has_rdoc = true
