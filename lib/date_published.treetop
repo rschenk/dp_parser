@@ -1,0 +1,110 @@
+grammar DatePublished
+  rule date
+    date_range    { def to_date; f = to_h; Date.new(f[:year], f[:month] || 1, f[:day] || 1); end }
+    /
+    absolute_date { def to_date; f = to_h; Date.new(f[:year], f[:month] || 1, f[:day] || 1); end }
+  end
+  
+  rule date_range
+    year_range space season_range { def to_h; year_range.to_h.merge(season_range.to_h); end}
+    /
+    year_range space season       { def to_h; year_range.to_h.merge(season.to_h); end}
+    /
+    year_range
+    /
+    year space season_range       { def to_h; year.to_h.merge(season_range.to_h); end}
+    /
+    year space month_range        { def to_h; year.to_h.merge(month_range.to_h); end}
+    /
+    year space day_range          { def to_h; year.to_h.merge(day_range.to_h); end}
+    /
+    absolute_date_range 
+  end
+  
+  rule absolute_date
+    year space month space day { def to_h; year.to_h.merge(month.to_h.merge(day.to_h)); end }
+    /
+    year space month           { def to_h; year.to_h.merge(month.to_h) end }
+    /
+    year
+  end
+  
+  rule absolute_date_range
+    absolute_date hyphen absolute_date { def to_h; elements.first.to_h; end}
+  end
+  
+  
+  rule year_range
+    year hyphen year { def to_h; elements.first.to_h; end }
+  end
+  
+  
+  rule season_range
+    season hyphen season { def to_h; elements.first.to_h; end }
+  end
+  
+  
+  rule month_range
+    month hyphen month { def to_h; elements.first.to_h; end }
+  end
+  
+  rule day_range
+    month space day hyphen day { def to_h; month.to_h.merge( elements[2].to_h ); end }
+    /
+    month space day hyphen month space day { def to_h; elements.first.to_h.merge( elements[2].to_h ); end }
+  end
+  
+  rule year
+    [0-9] [0-9] [0-9] [0-9] { def to_h; { :year => text_value.to_i }; end }
+  end
+
+	rule month
+	  'Jan' { def to_h; { :month => 1 }; end }
+	  /
+	  'Feb' { def to_h; { :month => 2 }; end }
+	  /
+	  'Mar' { def to_h; { :month => 3 }; end }
+    /
+    'Apr' { def to_h; { :month => 4 }; end }
+    /
+    'May' { def to_h; { :month => 5 }; end }
+    /
+    'Jun' { def to_h; { :month => 6 }; end }
+    /
+    'Jul' { def to_h; { :month => 7 }; end }
+    /
+    'Aug' { def to_h; { :month => 8 }; end }
+    /
+    'Sep' { def to_h; { :month => 9 }; end }
+    /
+    'Oct' { def to_h; { :month => 10 }; end }
+    /
+    'Nov' { def to_h; { :month => 11 }; end }
+    /
+    'Dec' { def to_h; { :month => 12 }; end }
+	end
+	
+	rule day
+	 [123] [0-9] ![0-9] { def to_h; { :day => text_value.to_i }; end }
+	 /
+	 [0-9] ![0-9]       { def to_h; { :day => text_value.to_i }; end }
+	end
+	
+	rule season
+	 'Winter' { def to_h; { :month => 12, :day => 21 }; end }
+	 /
+	 'Spring' { def to_h; { :month =>  3, :day => 21 }; end }
+	 /
+	 'Summer' { def to_h; { :month =>  6, :day => 21 }; end }
+	 /
+	 'Fall'   { def to_h; { :month =>  9, :day => 21 }; end }
+	end
+	
+	rule hyphen
+	 '-' { def to_h; {}; end }
+	end
+	
+	rule space
+	  [\s]+ { def to_h; {}; end }
+  end
+end
