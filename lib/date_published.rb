@@ -9,11 +9,11 @@ module DatePublished
   end
 
   module Date0
-    def to_date; f = to_h; Date.new(f[:year], f[:month] || 1, f[:day] || 1); end
+    def to_date; f = to_h; Date.new(f[:year], f[:month] || 1, f[:day] || 1); end; def season?; to_h.has_key?(:season); end
   end
 
   module Date1
-    def to_date; f = to_h; Date.new(f[:year], f[:month] || 1, f[:day] || 1); end
+    def to_date; f = to_h; Date.new(f[:year], f[:month] || 1, f[:day] || 1); end; def season?; to_h.has_key?(:season); end
   end
 
   def _nt_date
@@ -321,6 +321,24 @@ module DatePublished
     def to_h; year.to_h.merge(month.to_h) end
   end
 
+  module AbsoluteDate4
+    def year
+      elements[0]
+    end
+
+    def space
+      elements[1]
+    end
+
+    def season
+      elements[2]
+    end
+  end
+
+  module AbsoluteDate5
+    def to_h; year.to_h.merge(season.to_h) end
+  end
+
   def _nt_absolute_date
     start_index = index
     if node_cache[:absolute_date].has_key?(index)
@@ -382,12 +400,35 @@ module DatePublished
       if r7
         r0 = r7
       else
-        r11 = _nt_year
+        i11, s11 = index, []
+        r12 = _nt_year
+        s11 << r12
+        if r12
+          r13 = _nt_space
+          s11 << r13
+          if r13
+            r14 = _nt_season
+            s11 << r14
+          end
+        end
+        if s11.last
+          r11 = instantiate_node(SyntaxNode,input, i11...index, s11)
+          r11.extend(AbsoluteDate4)
+          r11.extend(AbsoluteDate5)
+        else
+          @index = i11
+          r11 = nil
+        end
         if r11
           r0 = r11
         else
-          @index = i0
-          r0 = nil
+          r15 = _nt_year
+          if r15
+            r0 = r15
+          else
+            @index = i0
+            r0 = nil
+          end
         end
       end
     end
@@ -1134,19 +1175,19 @@ module DatePublished
   end
 
   module Season0
-    def to_h; { :month => 12, :day => 21 }; end
+    def to_h; { :month => 12, :day => 21, :season => true }; end;
   end
 
   module Season1
-    def to_h; { :month =>  3, :day => 21 }; end
+    def to_h; { :month =>  3, :day => 21, :season => true }; end;
   end
 
   module Season2
-    def to_h; { :month =>  6, :day => 21 }; end
+    def to_h; { :month =>  6, :day => 21, :season => true }; end;
   end
 
   module Season3
-    def to_h; { :month =>  9, :day => 21 }; end
+    def to_h; { :month =>  9, :day => 21, :season => true }; end;
   end
 
   def _nt_season
