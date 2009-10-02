@@ -39,6 +39,7 @@ def pretty_print_hash(h)
  fields << ":year => #{h[:year]}" if h[:year]
  fields << ":month => #{h[:month]}" if h[:month]
  fields << ":day => #{h[:day]}" if h[:day]
+ fields << ":season => #{h[:season]}" if h[:season]
 
  "{#{fields.join(', ')}}"
 end

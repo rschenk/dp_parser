@@ -36,6 +36,10 @@ This may not necessarily hold true for records that have a Date of Publication l
 
 Seasons present a particular challenge. For instance, "1974-1975 Winter". What does that even mean? When we encounter a date with a season, we just set it to the first day of that season. So, "1974-1975 Winter" becomes the first day of winter, 1974: 1974 Dec 21.
 
+When dp_parser starts inferring (inventing) dates like this, it will add `{ :season => true }` into the has returned by `#to_h`
+
+Likewise, the #season? method is defined on every node, and can be used to figure out whether the date has been inferred to be the beginning of a season.
+
 ## Installation
 
     sudo gem install rschenk-dp_parser
@@ -53,6 +57,14 @@ The two methods you're interested in are to_h and to_date.
 
     result.to_date.to_s
     => 1997-5-1
+    
+    a_season = p.parse('1984 Spring')
+    
+    a_season.season?
+    => true
+    
+    a_season.to_h
+    => {:year => 1984, :month => 3, :day => 21, :season => true}
 
 Notice that when you call to_h, it only fills out the fields that it knows. In the example above, there is no :day field in the hash, because the given date does not specify a day.
 

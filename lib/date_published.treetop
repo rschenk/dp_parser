@@ -1,8 +1,8 @@
 grammar DatePublished
   rule date
-    date_range    { def to_date; f = to_h; Date.new(f[:year], f[:month] || 1, f[:day] || 1); end }
+    date_range    { def to_date; f = to_h; Date.new(f[:year], f[:month] || 1, f[:day] || 1); end; def season?; to_h.has_key?(:season); end }
     /
-    absolute_date { def to_date; f = to_h; Date.new(f[:year], f[:month] || 1, f[:day] || 1); end }
+    absolute_date { def to_date; f = to_h; Date.new(f[:year], f[:month] || 1, f[:day] || 1); end; def season?; to_h.has_key?(:season); end }
   end
   
   rule date_range
@@ -25,6 +25,8 @@ grammar DatePublished
     year space month space day { def to_h; year.to_h.merge(month.to_h.merge(day.to_h)); end }
     /
     year space month           { def to_h; year.to_h.merge(month.to_h) end }
+    /
+    year space season          { def to_h; year.to_h.merge(season.to_h) end }
     /
     year
   end
@@ -91,13 +93,13 @@ grammar DatePublished
 	end
 	
 	rule season
-	 'Winter' { def to_h; { :month => 12, :day => 21 }; end }
-	 /
-	 'Spring' { def to_h; { :month =>  3, :day => 21 }; end }
-	 /
-	 'Summer' { def to_h; { :month =>  6, :day => 21 }; end }
-	 /
-	 'Fall'   { def to_h; { :month =>  9, :day => 21 }; end }
+	 'Winter' { def to_h; { :month => 12, :day => 21, :season => true }; end; }
+	 /                                                       
+	 'Spring' { def to_h; { :month =>  3, :day => 21, :season => true }; end;  }
+	 /                                                       
+	 'Summer' { def to_h; { :month =>  6, :day => 21, :season => true }; end;  }
+	 /                                                       
+	 'Fall'   { def to_h; { :month =>  9, :day => 21, :season => true }; end;  }
 	end
 	
 	rule hyphen
