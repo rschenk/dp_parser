@@ -36,7 +36,7 @@ This may not necessarily hold true for records that have a Date of Publication l
 
 Seasons present a particular challenge. For instance, "1974-1975 Winter". What does that even mean? When we encounter a date with a season, we just set it to the first day of that season. So, "1974-1975 Winter" becomes the first day of winter, 1974: 1974 Dec 21.
 
-When dp_parser starts inferring (inventing) dates like this, it will add `{ :season => true }` into the has returned by `#to_h`
+When dp_parser starts inferring (inventing) dates like this, it will add `{ :season => true }` into the hash returned by `#to_h`
 
 Likewise, the #season? method is defined on every node, and can be used to figure out whether the date has been inferred to be the beginning of a season.
 
