@@ -5,22 +5,22 @@
 
 Gem::Specification.new do |s|
   s.name = %q{dp_parser}
-  s.version = "0.1.0"
+  s.version = "0.1.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Ryan Schenk"]
-  s.date = %q{2009-10-01}
+  s.date = %q{2009-10-02}
   s.description = %q{There are 12 different variants in Medline's Date Published field, none of which are particularly machine readable. Even worse, many are not exact dates, but date ranges. This is a treetop grammar to make dealing with them easier.}
   s.email = %q{rschenk@gmail.com}
   s.extra_rdoc_files = [
     "LICENSE",
-     "README.rdoc"
+     "README.markdown"
   ]
   s.files = [
     ".document",
      ".gitignore",
      "LICENSE",
-     "README.rdoc",
+     "README.markdown",
      "Rakefile",
      "VERSION",
      "dp_parser.gemspec",
