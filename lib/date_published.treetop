@@ -61,6 +61,13 @@ grammar DatePublished
   end
 
 	rule month
+	  # Medline uses 3-letter month abbreviations except when they don't
+    'July' { def to_h; { :month => 7 }; end }
+    /
+    'June' { def to_h; { :month => 6 }; end }
+    /
+    'March' { def to_h; {:month => 3 }; end }
+    /
 	  'Jan' { def to_h; { :month => 1 }; end }
 	  /
 	  'Feb' { def to_h; { :month => 2 }; end }

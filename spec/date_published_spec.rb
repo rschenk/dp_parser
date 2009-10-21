@@ -18,7 +18,10 @@ DATE_RANGES    = [ ['1995-1997',                {:year => 1995}],
                    ['1974-1975 Winter',         {:year => 1974, :month => 12,:day => 21, :season => true}],
                    ['1981-1982 Winter-Spring',  {:year => 1981, :month => 12,:day => 21, :season => true}],
                    ['1995 Dec 14-1996 Jan 11',  {:year => 1995, :month => 12,:day => 14}],
-                   ['1993 Dec-1994 Jan'      ,  {:year => 1993, :month => 12}]]
+                   ['1993 Dec-1994 Jan'      ,  {:year => 1993, :month => 12}],
+                   ['1948 Jan-March',           {:year => 1948, :month => 1}],              # Special case where "March" is not abbreviated
+                   ['1948 May 15-June 1',       {:year => 1948, :month => 5, :day => 15}],  # Special case where "June" is not abbreviated
+                   ['1948 July-Dec',            {:year => 1948, :month => 7}]]              # Special case where "July" is not abbreviated
 
 describe DatePublishedParser do
   before(:all) do

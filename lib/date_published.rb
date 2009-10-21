@@ -854,50 +854,62 @@ module DatePublished
   end
 
   module Month0
-    def to_h; { :month => 1 }; end
-  end
-
-  module Month1
-    def to_h; { :month => 2 }; end
-  end
-
-  module Month2
-    def to_h; { :month => 3 }; end
-  end
-
-  module Month3
-    def to_h; { :month => 4 }; end
-  end
-
-  module Month4
-    def to_h; { :month => 5 }; end
-  end
-
-  module Month5
-    def to_h; { :month => 6 }; end
-  end
-
-  module Month6
     def to_h; { :month => 7 }; end
   end
 
+  module Month1
+    def to_h; { :month => 6 }; end
+  end
+
+  module Month2
+    def to_h; {:month => 3 }; end
+  end
+
+  module Month3
+    def to_h; { :month => 1 }; end
+  end
+
+  module Month4
+    def to_h; { :month => 2 }; end
+  end
+
+  module Month5
+    def to_h; { :month => 3 }; end
+  end
+
+  module Month6
+    def to_h; { :month => 4 }; end
+  end
+
   module Month7
-    def to_h; { :month => 8 }; end
+    def to_h; { :month => 5 }; end
   end
 
   module Month8
-    def to_h; { :month => 9 }; end
+    def to_h; { :month => 6 }; end
   end
 
   module Month9
-    def to_h; { :month => 10 }; end
+    def to_h; { :month => 7 }; end
   end
 
   module Month10
-    def to_h; { :month => 11 }; end
+    def to_h; { :month => 8 }; end
   end
 
   module Month11
+    def to_h; { :month => 9 }; end
+  end
+
+  module Month12
+    def to_h; { :month => 10 }; end
+  end
+
+  module Month13
+    def to_h; { :month => 11 }; end
+  end
+
+  module Month14
     def to_h; { :month => 12 }; end
   end
 
@@ -910,140 +922,176 @@ module DatePublished
     end
 
     i0 = index
-    if has_terminal?('Jan', false, index)
-      r1 = instantiate_node(SyntaxNode,input, index...(index + 3))
+    if has_terminal?('July', false, index)
+      r1 = instantiate_node(SyntaxNode,input, index...(index + 4))
       r1.extend(Month0)
-      @index += 3
+      @index += 4
     else
-      terminal_parse_failure('Jan')
+      terminal_parse_failure('July')
       r1 = nil
     end
     if r1
       r0 = r1
     else
-      if has_terminal?('Feb', false, index)
-        r2 = instantiate_node(SyntaxNode,input, index...(index + 3))
+      if has_terminal?('June', false, index)
+        r2 = instantiate_node(SyntaxNode,input, index...(index + 4))
         r2.extend(Month1)
-        @index += 3
+        @index += 4
       else
-        terminal_parse_failure('Feb')
+        terminal_parse_failure('June')
         r2 = nil
       end
       if r2
         r0 = r2
       else
-        if has_terminal?('Mar', false, index)
-          r3 = instantiate_node(SyntaxNode,input, index...(index + 3))
+        if has_terminal?('March', false, index)
+          r3 = instantiate_node(SyntaxNode,input, index...(index + 5))
           r3.extend(Month2)
-          @index += 3
+          @index += 5
         else
-          terminal_parse_failure('Mar')
+          terminal_parse_failure('March')
           r3 = nil
         end
         if r3
           r0 = r3
         else
-          if has_terminal?('Apr', false, index)
+          if has_terminal?('Jan', false, index)
             r4 = instantiate_node(SyntaxNode,input, index...(index + 3))
             r4.extend(Month3)
             @index += 3
           else
-            terminal_parse_failure('Apr')
+            terminal_parse_failure('Jan')
             r4 = nil
           end
           if r4
             r0 = r4
           else
-            if has_terminal?('May', false, index)
+            if has_terminal?('Feb', false, index)
               r5 = instantiate_node(SyntaxNode,input, index...(index + 3))
               r5.extend(Month4)
               @index += 3
             else
-              terminal_parse_failure('May')
+              terminal_parse_failure('Feb')
               r5 = nil
             end
             if r5
               r0 = r5
             else
-              if has_terminal?('Jun', false, index)
+              if has_terminal?('Mar', false, index)
                 r6 = instantiate_node(SyntaxNode,input, index...(index + 3))
                 r6.extend(Month5)
                 @index += 3
               else
-                terminal_parse_failure('Jun')
+                terminal_parse_failure('Mar')
                 r6 = nil
               end
               if r6
                 r0 = r6
               else
-                if has_terminal?('Jul', false, index)
+                if has_terminal?('Apr', false, index)
                   r7 = instantiate_node(SyntaxNode,input, index...(index + 3))
                   r7.extend(Month6)
                   @index += 3
                 else
-                  terminal_parse_failure('Jul')
+                  terminal_parse_failure('Apr')
                   r7 = nil
                 end
                 if r7
                   r0 = r7
                 else
-                  if has_terminal?('Aug', false, index)
+                  if has_terminal?('May', false, index)
                     r8 = instantiate_node(SyntaxNode,input, index...(index + 3))
                     r8.extend(Month7)
                     @index += 3
                   else
-                    terminal_parse_failure('Aug')
+                    terminal_parse_failure('May')
                     r8 = nil
                   end
                   if r8
                     r0 = r8
                   else
-                    if has_terminal?('Sep', false, index)
+                    if has_terminal?('Jun', false, index)
                       r9 = instantiate_node(SyntaxNode,input, index...(index + 3))
                       r9.extend(Month8)
                       @index += 3
                     else
-                      terminal_parse_failure('Sep')
+                      terminal_parse_failure('Jun')
                       r9 = nil
                     end
                     if r9
                       r0 = r9
                     else
-                      if has_terminal?('Oct', false, index)
+                      if has_terminal?('Jul', false, index)
                         r10 = instantiate_node(SyntaxNode,input, index...(index + 3))
                         r10.extend(Month9)
                         @index += 3
                       else
-                        terminal_parse_failure('Oct')
+                        terminal_parse_failure('Jul')
                         r10 = nil
                       end
                       if r10
                         r0 = r10
                       else
-                        if has_terminal?('Nov', false, index)
+                        if has_terminal?('Aug', false, index)
                           r11 = instantiate_node(SyntaxNode,input, index...(index + 3))
                           r11.extend(Month10)
                           @index += 3
                         else
-                          terminal_parse_failure('Nov')
+                          terminal_parse_failure('Aug')
                           r11 = nil
                         end
                         if r11
                           r0 = r11
                         else
-                          if has_terminal?('Dec', false, index)
+                          if has_terminal?('Sep', false, index)
                             r12 = instantiate_node(SyntaxNode,input, index...(index + 3))
                             r12.extend(Month11)
                             @index += 3
                           else
-                            terminal_parse_failure('Dec')
+                            terminal_parse_failure('Sep')
                             r12 = nil
                           end
                           if r12
                             r0 = r12
                           else
-                            @index = i0
-                            r0 = nil
+                            if has_terminal?('Oct', false, index)
+                              r13 = instantiate_node(SyntaxNode,input, index...(index + 3))
+                              r13.extend(Month12)
+                              @index += 3
+                            else
+                              terminal_parse_failure('Oct')
+                              r13 = nil
+                            end
+                            if r13
+                              r0 = r13
+                            else
+                              if has_terminal?('Nov', false, index)
+                                r14 = instantiate_node(SyntaxNode,input, index...(index + 3))
+                                r14.extend(Month13)
+                                @index += 3
+                              else
+                                terminal_parse_failure('Nov')
+                                r14 = nil
+                              end
+                              if r14
+                                r0 = r14
+                              else
+                                if has_terminal?('Dec', false, index)
+                                  r15 = instantiate_node(SyntaxNode,input, index...(index + 3))
+                                  r15.extend(Month14)
+                                  @index += 3
+                                else
+                                  terminal_parse_failure('Dec')
+                                  r15 = nil
+                                end
+                                if r15
+                                  r0 = r15
+                                else
+                                  @index = i0
+                                  r0 = nil
+                                end
+                              end
+                            end
                           end
                         end
                       end
