@@ -100,6 +100,8 @@ grammar DatePublished
 	 'Summer' { def to_h; { :month =>  6, :day => 21, :season => true }; end;  }
 	 /                                                       
 	 'Fall'   { def to_h; { :month =>  9, :day => 21, :season => true }; end;  }
+	 /
+	 'Autumn' { def to_h; { :month =>  9, :day => 21, :season => true }; end;  }
 	end
 	
 	rule hyphen

@@ -1190,6 +1190,10 @@ module DatePublished
     def to_h; { :month =>  9, :day => 21, :season => true }; end;
   end
 
+  module Season4
+    def to_h; { :month =>  9, :day => 21, :season => true }; end;
+  end
+
   def _nt_season
     start_index = index
     if node_cache[:season].has_key?(index)
@@ -1243,8 +1247,20 @@ module DatePublished
           if r4
             r0 = r4
           else
-            @index = i0
-            r0 = nil
+            if has_terminal?('Autumn', false, index)
+              r5 = instantiate_node(SyntaxNode,input, index...(index + 6))
+              r5.extend(Season4)
+              @index += 6
+            else
+              terminal_parse_failure('Autumn')
+              r5 = nil
+            end
+            if r5
+              r0 = r5
+            else
+              @index = i0
+              r0 = nil
+            end
           end
         end
       end
