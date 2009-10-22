@@ -7,7 +7,8 @@ Treetop.load(File.dirname(__FILE__) + '/../lib/date_published')
 #                   Input                       Expected Output
 ABSOLUTE_DATES = [ ['2009',                     {:year => 2009}],
                    ['2009 May',                 {:year => 2009, :month => 5}],
-                   ['2009 May 25',              {:year => 2009, :month => 5, :day => 25}] ]
+                   ['2009 May 25',              {:year => 2009, :month => 5, :day => 25}],
+                   ['1962 Christmas',           {:year => 1962, :month => 12,:day => 25}]]
 DATE_RANGES    = [ ['1995-1997',                {:year => 1995}],
                    ['1977 May-Jun',             {:year => 1977, :month => 5}],
                    ['1983 Feb 17-23',           {:year => 1983, :month => 2, :day => 17}],
@@ -22,6 +23,20 @@ DATE_RANGES    = [ ['1995-1997',                {:year => 1995}],
                    ['1948 Jan-March',           {:year => 1948, :month => 1}],              # Special case where "March" is not abbreviated
                    ['1948 May 15-June 1',       {:year => 1948, :month => 5, :day => 15}],  # Special case where "June" is not abbreviated
                    ['1948 July-Dec',            {:year => 1948, :month => 7}]]              # Special case where "July" is not abbreviated
+KOOKY_DATES    = [ ['1962 1st Semester',        {:year => 1962, :month => 9,  :day => 1, :season => true}],
+                   ['1962 2rd Semest',          {:year => 1962, :month => 1,  :day => 1, :season => true}], # Srsly!!
+                   ['1962 2nd Semester',        {:year => 1962, :month => 1,  :day => 1, :season => true}],
+                   ['1962 2d Semester',         {:year => 1962, :month => 1,  :day => 1, :season => true}],
+                   ['1960 1st Trimest',         {:year => 1960, :month => 9,  :day => 1, :season => true}],
+                   ['1960 2d Trimest',          {:year => 1960, :month => 12, :day => 1, :season => true}],
+                   ['1960 2nd Trimest',         {:year => 1960, :month => 12, :day => 1, :season => true}],
+                   ['1960 3d Trimest',          {:year => 1960, :month => 3,  :day => 1, :season => true}],
+                   ['1960 3rd Trimest',         {:year => 1960, :month => 3,  :day => 1, :season => true}],
+                   ['1960 4th Trimest',         {:year => 1960, :month => 6,  :day => 1, :season => true}], # 4 Trimesters. How does that even work??
+                   ['1978 1st Quart',           {:year => 1978, :month => 7,  :day => 1, :season => true}],
+                   ['1978 2d Quart',            {:year => 1978, :month => 10, :day => 1, :season => true}],
+                   ['1978 3d Quart',            {:year => 1978, :month => 1,  :day => 1, :season => true}],
+                   ['1978 4th Quart',           {:year => 1978, :month => 4,  :day => 1, :season => true}]]
 
 describe DatePublishedParser do
   before(:all) do
@@ -41,6 +56,16 @@ describe DatePublishedParser do
   
     describe "date ranges" do
       DATE_RANGES.each do |date_range, expected_return_fields|
+      
+        it "should parse #{date_range.inspect}" do
+          @parser.should parse(date_range)
+        end
+      
+      end
+    end
+    
+    describe "kooky date ranges" do
+      KOOKY_DATES.each do |date_range, expected_return_fields|
       
         it "should parse #{date_range.inspect}" do
           @parser.should parse(date_range)

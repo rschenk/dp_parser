@@ -28,6 +28,14 @@ grammar DatePublished
     /
     year space season          { def to_h; year.to_h.merge(season.to_h) end }
     /
+    year space christmas       { def to_h; year.to_h.merge(christmas.to_h) end }
+    /
+    year space semester        { def to_h; year.to_h.merge(semester.to_h) end }
+    /
+    year space trimester       { def to_h; year.to_h.merge(trimester.to_h) end }
+    /
+    year space quarter         { def to_h; year.to_h.merge(quarter.to_h) end }
+    /
     year
   end
   
@@ -109,6 +117,65 @@ grammar DatePublished
 	 'Fall'   { def to_h; { :month =>  9, :day => 21, :season => true }; end;  }
 	 /
 	 'Autumn' { def to_h; { :month =>  9, :day => 21, :season => true }; end;  }
+	end
+	
+	rule christmas
+	 'Christmas' { def to_h; { :month => 12, :day => 25 }; end }
+	end
+	
+	rule semester
+	  first space semest    { def to_h; { :month => 9, :day => 1, :season => true }; end }
+	  /
+	  second space semest   { def to_h; { :month => 1, :day => 1, :season => true }; end }
+	end
+	
+	rule trimester
+	  first space trimest   { def to_h; { :month => 9, :day => 1, :season => true }; end }
+	  /
+	  second space trimest  { def to_h; { :month => 12, :day => 1, :season => true }; end }
+	  /
+	  third space trimest   { def to_h; { :month => 3, :day => 1, :season => true }; end }
+	  /
+	  fourth space trimest  { def to_h; { :month => 6, :day => 1, :season => true }; end }
+	  # Fourth trimester. For real.
+	end
+	
+	rule quarter
+	 first space quart      { def to_h; { :month => 7, :day => 1, :season => true }; end }
+	 /
+	 second space quart     { def to_h; { :month => 10, :day => 1, :season => true }; end }
+	 /
+	 third space quart      { def to_h; { :month => 1, :day => 1, :season => true }; end }
+	 /
+	 fourth space quart     { def to_h; { :month => 4, :day => 1, :season => true }; end }
+	end
+	
+	rule first
+	 '1st'
+	end
+	
+	rule second
+	  '2nd' / '2d' / '2rd'
+	end
+	
+	rule third
+	 '3rd' / '3d'
+	end
+	
+	rule fourth
+	  '4th'
+  end
+	
+	rule semest
+	  'Semester' / 'Semest'
+	end
+	
+	rule quart
+	 'Quarter' / 'Quart'
+	end
+	
+	rule trimest
+	 'Trimester' / 'Trimest'
 	end
 	
 	rule hyphen

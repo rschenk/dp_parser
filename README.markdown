@@ -14,6 +14,7 @@ dp_parser does this for you.
 * 2009 [example](http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&retmax=1&retmode=medline&rettype=medline&id=19667745)
 * 2009 Jun [example](http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&retmax=1&retmode=medline&rettype=medline&id=19470686)
 * 2009 Aug 4 [example](http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&retmax=1&retmode=medline&rettype=medline&id=19651618)
+* 1962 Christmas [example](http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&retmax=1&retmode=medline&rettype=medline&id=13930362)
 
 ## Known Variations of Date Ranges
 * 1977 May-Jun [example](http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&retmax=1&retmode=medline&rettype=medline&id=904940)
@@ -25,6 +26,17 @@ dp_parser does this for you.
 * 1981-1982 Winter-Spring [example](http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&retmax=1&retmode=medline&rettype=medline&id=7346545)
 * 1995 Dec 14-1996 Jan 11 [example](http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&retmax=1&retmode=medline&rettype=medline&id=8696106)
 * 1993 Dec-1994 Jan [example](http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&retmax=1&retmode=medline&rettype=medline&id=7660197)
+* 1962 1st Semester [example](http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&retmax=1&retmode=medline&rettype=medline&id=13943751)
+* 1962 2rd Semest [example](http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&retmax=1&retmode=medline&rettype=medline&id=13976125)
+* 1961 1st Trimest [example](http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&retmax=1&retmode=medline&rettype=medline&id=13750260)
+* 1960 2d Trimest [example](http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&retmax=1&retmode=medline&rettype=medline&id=13685263)
+* 1960 3d Trimest [example](http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&retmax=1&retmode=medline&rettype=medline&id=13695562)
+* 1960 4th Trimest [example](http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&retmax=1&retmode=medline&rettype=medline&id=13699006)
+* 1978 1st Quart [example](http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&retmax=1&retmode=medline&rettype=medline&id=10237212)
+* 1980 2d Quart [example](http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&retmax=1&retmode=medline&rettype=medline&id=10248150)
+* 1980 3d Quart [example](http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&retmax=1&retmode=medline&rettype=medline&id=10249185)
+* 1980 4th Quart [example](http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&retmax=1&retmode=medline&rettype=medline&id=10249456)
+
 
 ## How it Handles Date Ranges
 
@@ -39,6 +51,14 @@ Seasons present a particular challenge. For instance, "1974-1975 Winter". What d
 When dp_parser starts inferring (inventing) dates like this, it will add `{ :season => true }` into the hash returned by `#to_h`
 
 Likewise, the #season? method is defined on every node, and can be used to figure out whether the date has been inferred to be the beginning of a season.
+
+## How it Handles Semesters, Trimesters, and Quarters
+
+Much like seasons, I just arbitrarily picked a date that approximates the first day of a given semester, trimester, or quarter.
+
+However, there's all kinds of fun to be had with these dates. First of all, did you notice that some publications occur during the 4th trimester [example](http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&retmax=1&retmode=medline&rettype=medline&id=14456335)? How in the heck do you have four trimesters?
+
+Another fun one is [this little gem](http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&retmax=1&retmode=medline&rettype=medline&id=13976125) which was published during the "2rd" semester. YES!!
 
 ## Installation
 

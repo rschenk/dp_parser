@@ -339,6 +339,78 @@ module DatePublished
     def to_h; year.to_h.merge(season.to_h) end
   end
 
+  module AbsoluteDate6
+    def year
+      elements[0]
+    end
+
+    def space
+      elements[1]
+    end
+
+    def christmas
+      elements[2]
+    end
+  end
+
+  module AbsoluteDate7
+    def to_h; year.to_h.merge(christmas.to_h) end
+  end
+
+  module AbsoluteDate8
+    def year
+      elements[0]
+    end
+
+    def space
+      elements[1]
+    end
+
+    def semester
+      elements[2]
+    end
+  end
+
+  module AbsoluteDate9
+    def to_h; year.to_h.merge(semester.to_h) end
+  end
+
+  module AbsoluteDate10
+    def year
+      elements[0]
+    end
+
+    def space
+      elements[1]
+    end
+
+    def trimester
+      elements[2]
+    end
+  end
+
+  module AbsoluteDate11
+    def to_h; year.to_h.merge(trimester.to_h) end
+  end
+
+  module AbsoluteDate12
+    def year
+      elements[0]
+    end
+
+    def space
+      elements[1]
+    end
+
+    def quarter
+      elements[2]
+    end
+  end
+
+  module AbsoluteDate13
+    def to_h; year.to_h.merge(quarter.to_h) end
+  end
+
   def _nt_absolute_date
     start_index = index
     if node_cache[:absolute_date].has_key?(index)
@@ -422,12 +494,104 @@ module DatePublished
         if r11
           r0 = r11
         else
-          r15 = _nt_year
+          i15, s15 = index, []
+          r16 = _nt_year
+          s15 << r16
+          if r16
+            r17 = _nt_space
+            s15 << r17
+            if r17
+              r18 = _nt_christmas
+              s15 << r18
+            end
+          end
+          if s15.last
+            r15 = instantiate_node(SyntaxNode,input, i15...index, s15)
+            r15.extend(AbsoluteDate6)
+            r15.extend(AbsoluteDate7)
+          else
+            @index = i15
+            r15 = nil
+          end
           if r15
             r0 = r15
           else
-            @index = i0
-            r0 = nil
+            i19, s19 = index, []
+            r20 = _nt_year
+            s19 << r20
+            if r20
+              r21 = _nt_space
+              s19 << r21
+              if r21
+                r22 = _nt_semester
+                s19 << r22
+              end
+            end
+            if s19.last
+              r19 = instantiate_node(SyntaxNode,input, i19...index, s19)
+              r19.extend(AbsoluteDate8)
+              r19.extend(AbsoluteDate9)
+            else
+              @index = i19
+              r19 = nil
+            end
+            if r19
+              r0 = r19
+            else
+              i23, s23 = index, []
+              r24 = _nt_year
+              s23 << r24
+              if r24
+                r25 = _nt_space
+                s23 << r25
+                if r25
+                  r26 = _nt_trimester
+                  s23 << r26
+                end
+              end
+              if s23.last
+                r23 = instantiate_node(SyntaxNode,input, i23...index, s23)
+                r23.extend(AbsoluteDate10)
+                r23.extend(AbsoluteDate11)
+              else
+                @index = i23
+                r23 = nil
+              end
+              if r23
+                r0 = r23
+              else
+                i27, s27 = index, []
+                r28 = _nt_year
+                s27 << r28
+                if r28
+                  r29 = _nt_space
+                  s27 << r29
+                  if r29
+                    r30 = _nt_quarter
+                    s27 << r30
+                  end
+                end
+                if s27.last
+                  r27 = instantiate_node(SyntaxNode,input, i27...index, s27)
+                  r27.extend(AbsoluteDate12)
+                  r27.extend(AbsoluteDate13)
+                else
+                  @index = i27
+                  r27 = nil
+                end
+                if r27
+                  r0 = r27
+                else
+                  r31 = _nt_year
+                  if r31
+                    r0 = r31
+                  else
+                    @index = i0
+                    r0 = nil
+                  end
+                end
+              end
+            end
           end
         end
       end
@@ -1315,6 +1479,741 @@ module DatePublished
     end
 
     node_cache[:season][start_index] = r0
+
+    r0
+  end
+
+  module Christmas0
+    def to_h; { :month => 12, :day => 25 }; end
+  end
+
+  def _nt_christmas
+    start_index = index
+    if node_cache[:christmas].has_key?(index)
+      cached = node_cache[:christmas][index]
+      @index = cached.interval.end if cached
+      return cached
+    end
+
+    if has_terminal?('Christmas', false, index)
+      r0 = instantiate_node(SyntaxNode,input, index...(index + 9))
+      r0.extend(Christmas0)
+      @index += 9
+    else
+      terminal_parse_failure('Christmas')
+      r0 = nil
+    end
+
+    node_cache[:christmas][start_index] = r0
+
+    r0
+  end
+
+  module Semester0
+    def first
+      elements[0]
+    end
+
+    def space
+      elements[1]
+    end
+
+    def semest
+      elements[2]
+    end
+  end
+
+  module Semester1
+    def to_h; { :month => 9, :day => 1, :season => true }; end
+  end
+
+  module Semester2
+    def second
+      elements[0]
+    end
+
+    def space
+      elements[1]
+    end
+
+    def semest
+      elements[2]
+    end
+  end
+
+  module Semester3
+    def to_h; { :month => 1, :day => 1, :season => true }; end
+  end
+
+  def _nt_semester
+    start_index = index
+    if node_cache[:semester].has_key?(index)
+      cached = node_cache[:semester][index]
+      @index = cached.interval.end if cached
+      return cached
+    end
+
+    i0 = index
+    i1, s1 = index, []
+    r2 = _nt_first
+    s1 << r2
+    if r2
+      r3 = _nt_space
+      s1 << r3
+      if r3
+        r4 = _nt_semest
+        s1 << r4
+      end
+    end
+    if s1.last
+      r1 = instantiate_node(SyntaxNode,input, i1...index, s1)
+      r1.extend(Semester0)
+      r1.extend(Semester1)
+    else
+      @index = i1
+      r1 = nil
+    end
+    if r1
+      r0 = r1
+    else
+      i5, s5 = index, []
+      r6 = _nt_second
+      s5 << r6
+      if r6
+        r7 = _nt_space
+        s5 << r7
+        if r7
+          r8 = _nt_semest
+          s5 << r8
+        end
+      end
+      if s5.last
+        r5 = instantiate_node(SyntaxNode,input, i5...index, s5)
+        r5.extend(Semester2)
+        r5.extend(Semester3)
+      else
+        @index = i5
+        r5 = nil
+      end
+      if r5
+        r0 = r5
+      else
+        @index = i0
+        r0 = nil
+      end
+    end
+
+    node_cache[:semester][start_index] = r0
+
+    r0
+  end
+
+  module Trimester0
+    def first
+      elements[0]
+    end
+
+    def space
+      elements[1]
+    end
+
+    def trimest
+      elements[2]
+    end
+  end
+
+  module Trimester1
+    def to_h; { :month => 9, :day => 1, :season => true }; end
+  end
+
+  module Trimester2
+    def second
+      elements[0]
+    end
+
+    def space
+      elements[1]
+    end
+
+    def trimest
+      elements[2]
+    end
+  end
+
+  module Trimester3
+    def to_h; { :month => 12, :day => 1, :season => true }; end
+  end
+
+  module Trimester4
+    def third
+      elements[0]
+    end
+
+    def space
+      elements[1]
+    end
+
+    def trimest
+      elements[2]
+    end
+  end
+
+  module Trimester5
+    def to_h; { :month => 3, :day => 1, :season => true }; end
+  end
+
+  module Trimester6
+    def fourth
+      elements[0]
+    end
+
+    def space
+      elements[1]
+    end
+
+    def trimest
+      elements[2]
+    end
+  end
+
+  module Trimester7
+    def to_h; { :month => 6, :day => 1, :season => true }; end
+  end
+
+  def _nt_trimester
+    start_index = index
+    if node_cache[:trimester].has_key?(index)
+      cached = node_cache[:trimester][index]
+      @index = cached.interval.end if cached
+      return cached
+    end
+
+    i0 = index
+    i1, s1 = index, []
+    r2 = _nt_first
+    s1 << r2
+    if r2
+      r3 = _nt_space
+      s1 << r3
+      if r3
+        r4 = _nt_trimest
+        s1 << r4
+      end
+    end
+    if s1.last
+      r1 = instantiate_node(SyntaxNode,input, i1...index, s1)
+      r1.extend(Trimester0)
+      r1.extend(Trimester1)
+    else
+      @index = i1
+      r1 = nil
+    end
+    if r1
+      r0 = r1
+    else
+      i5, s5 = index, []
+      r6 = _nt_second
+      s5 << r6
+      if r6
+        r7 = _nt_space
+        s5 << r7
+        if r7
+          r8 = _nt_trimest
+          s5 << r8
+        end
+      end
+      if s5.last
+        r5 = instantiate_node(SyntaxNode,input, i5...index, s5)
+        r5.extend(Trimester2)
+        r5.extend(Trimester3)
+      else
+        @index = i5
+        r5 = nil
+      end
+      if r5
+        r0 = r5
+      else
+        i9, s9 = index, []
+        r10 = _nt_third
+        s9 << r10
+        if r10
+          r11 = _nt_space
+          s9 << r11
+          if r11
+            r12 = _nt_trimest
+            s9 << r12
+          end
+        end
+        if s9.last
+          r9 = instantiate_node(SyntaxNode,input, i9...index, s9)
+          r9.extend(Trimester4)
+          r9.extend(Trimester5)
+        else
+          @index = i9
+          r9 = nil
+        end
+        if r9
+          r0 = r9
+        else
+          i13, s13 = index, []
+          r14 = _nt_fourth
+          s13 << r14
+          if r14
+            r15 = _nt_space
+            s13 << r15
+            if r15
+              r16 = _nt_trimest
+              s13 << r16
+            end
+          end
+          if s13.last
+            r13 = instantiate_node(SyntaxNode,input, i13...index, s13)
+            r13.extend(Trimester6)
+            r13.extend(Trimester7)
+          else
+            @index = i13
+            r13 = nil
+          end
+          if r13
+            r0 = r13
+          else
+            @index = i0
+            r0 = nil
+          end
+        end
+      end
+    end
+
+    node_cache[:trimester][start_index] = r0
+
+    r0
+  end
+
+  module Quarter0
+    def first
+      elements[0]
+    end
+
+    def space
+      elements[1]
+    end
+
+    def quart
+      elements[2]
+    end
+  end
+
+  module Quarter1
+    def to_h; { :month => 7, :day => 1, :season => true }; end
+  end
+
+  module Quarter2
+    def second
+      elements[0]
+    end
+
+    def space
+      elements[1]
+    end
+
+    def quart
+      elements[2]
+    end
+  end
+
+  module Quarter3
+    def to_h; { :month => 10, :day => 1, :season => true }; end
+  end
+
+  module Quarter4
+    def third
+      elements[0]
+    end
+
+    def space
+      elements[1]
+    end
+
+    def quart
+      elements[2]
+    end
+  end
+
+  module Quarter5
+    def to_h; { :month => 1, :day => 1, :season => true }; end
+  end
+
+  module Quarter6
+    def fourth
+      elements[0]
+    end
+
+    def space
+      elements[1]
+    end
+
+    def quart
+      elements[2]
+    end
+  end
+
+  module Quarter7
+    def to_h; { :month => 4, :day => 1, :season => true }; end
+  end
+
+  def _nt_quarter
+    start_index = index
+    if node_cache[:quarter].has_key?(index)
+      cached = node_cache[:quarter][index]
+      @index = cached.interval.end if cached
+      return cached
+    end
+
+    i0 = index
+    i1, s1 = index, []
+    r2 = _nt_first
+    s1 << r2
+    if r2
+      r3 = _nt_space
+      s1 << r3
+      if r3
+        r4 = _nt_quart
+        s1 << r4
+      end
+    end
+    if s1.last
+      r1 = instantiate_node(SyntaxNode,input, i1...index, s1)
+      r1.extend(Quarter0)
+      r1.extend(Quarter1)
+    else
+      @index = i1
+      r1 = nil
+    end
+    if r1
+      r0 = r1
+    else
+      i5, s5 = index, []
+      r6 = _nt_second
+      s5 << r6
+      if r6
+        r7 = _nt_space
+        s5 << r7
+        if r7
+          r8 = _nt_quart
+          s5 << r8
+        end
+      end
+      if s5.last
+        r5 = instantiate_node(SyntaxNode,input, i5...index, s5)
+        r5.extend(Quarter2)
+        r5.extend(Quarter3)
+      else
+        @index = i5
+        r5 = nil
+      end
+      if r5
+        r0 = r5
+      else
+        i9, s9 = index, []
+        r10 = _nt_third
+        s9 << r10
+        if r10
+          r11 = _nt_space
+          s9 << r11
+          if r11
+            r12 = _nt_quart
+            s9 << r12
+          end
+        end
+        if s9.last
+          r9 = instantiate_node(SyntaxNode,input, i9...index, s9)
+          r9.extend(Quarter4)
+          r9.extend(Quarter5)
+        else
+          @index = i9
+          r9 = nil
+        end
+        if r9
+          r0 = r9
+        else
+          i13, s13 = index, []
+          r14 = _nt_fourth
+          s13 << r14
+          if r14
+            r15 = _nt_space
+            s13 << r15
+            if r15
+              r16 = _nt_quart
+              s13 << r16
+            end
+          end
+          if s13.last
+            r13 = instantiate_node(SyntaxNode,input, i13...index, s13)
+            r13.extend(Quarter6)
+            r13.extend(Quarter7)
+          else
+            @index = i13
+            r13 = nil
+          end
+          if r13
+            r0 = r13
+          else
+            @index = i0
+            r0 = nil
+          end
+        end
+      end
+    end
+
+    node_cache[:quarter][start_index] = r0
+
+    r0
+  end
+
+  def _nt_first
+    start_index = index
+    if node_cache[:first].has_key?(index)
+      cached = node_cache[:first][index]
+      @index = cached.interval.end if cached
+      return cached
+    end
+
+    if has_terminal?('1st', false, index)
+      r0 = instantiate_node(SyntaxNode,input, index...(index + 3))
+      @index += 3
+    else
+      terminal_parse_failure('1st')
+      r0 = nil
+    end
+
+    node_cache[:first][start_index] = r0
+
+    r0
+  end
+
+  def _nt_second
+    start_index = index
+    if node_cache[:second].has_key?(index)
+      cached = node_cache[:second][index]
+      @index = cached.interval.end if cached
+      return cached
+    end
+
+    i0 = index
+    if has_terminal?('2nd', false, index)
+      r1 = instantiate_node(SyntaxNode,input, index...(index + 3))
+      @index += 3
+    else
+      terminal_parse_failure('2nd')
+      r1 = nil
+    end
+    if r1
+      r0 = r1
+    else
+      if has_terminal?('2d', false, index)
+        r2 = instantiate_node(SyntaxNode,input, index...(index + 2))
+        @index += 2
+      else
+        terminal_parse_failure('2d')
+        r2 = nil
+      end
+      if r2
+        r0 = r2
+      else
+        if has_terminal?('2rd', false, index)
+          r3 = instantiate_node(SyntaxNode,input, index...(index + 3))
+          @index += 3
+        else
+          terminal_parse_failure('2rd')
+          r3 = nil
+        end
+        if r3
+          r0 = r3
+        else
+          @index = i0
+          r0 = nil
+        end
+      end
+    end
+
+    node_cache[:second][start_index] = r0
+
+    r0
+  end
+
+  def _nt_third
+    start_index = index
+    if node_cache[:third].has_key?(index)
+      cached = node_cache[:third][index]
+      @index = cached.interval.end if cached
+      return cached
+    end
+
+    i0 = index
+    if has_terminal?('3rd', false, index)
+      r1 = instantiate_node(SyntaxNode,input, index...(index + 3))
+      @index += 3
+    else
+      terminal_parse_failure('3rd')
+      r1 = nil
+    end
+    if r1
+      r0 = r1
+    else
+      if has_terminal?('3d', false, index)
+        r2 = instantiate_node(SyntaxNode,input, index...(index + 2))
+        @index += 2
+      else
+        terminal_parse_failure('3d')
+        r2 = nil
+      end
+      if r2
+        r0 = r2
+      else
+        @index = i0
+        r0 = nil
+      end
+    end
+
+    node_cache[:third][start_index] = r0
+
+    r0
+  end
+
+  def _nt_fourth
+    start_index = index
+    if node_cache[:fourth].has_key?(index)
+      cached = node_cache[:fourth][index]
+      @index = cached.interval.end if cached
+      return cached
+    end
+
+    if has_terminal?('4th', false, index)
+      r0 = instantiate_node(SyntaxNode,input, index...(index + 3))
+      @index += 3
+    else
+      terminal_parse_failure('4th')
+      r0 = nil
+    end
+
+    node_cache[:fourth][start_index] = r0
+
+    r0
+  end
+
+  def _nt_semest
+    start_index = index
+    if node_cache[:semest].has_key?(index)
+      cached = node_cache[:semest][index]
+      @index = cached.interval.end if cached
+      return cached
+    end
+
+    i0 = index
+    if has_terminal?('Semester', false, index)
+      r1 = instantiate_node(SyntaxNode,input, index...(index + 8))
+      @index += 8
+    else
+      terminal_parse_failure('Semester')
+      r1 = nil
+    end
+    if r1
+      r0 = r1
+    else
+      if has_terminal?('Semest', false, index)
+        r2 = instantiate_node(SyntaxNode,input, index...(index + 6))
+        @index += 6
+      else
+        terminal_parse_failure('Semest')
+        r2 = nil
+      end
+      if r2
+        r0 = r2
+      else
+        @index = i0
+        r0 = nil
+      end
+    end
+
+    node_cache[:semest][start_index] = r0
+
+    r0
+  end
+
+  def _nt_quart
+    start_index = index
+    if node_cache[:quart].has_key?(index)
+      cached = node_cache[:quart][index]
+      @index = cached.interval.end if cached
+      return cached
+    end
+
+    i0 = index
+    if has_terminal?('Quarter', false, index)
+      r1 = instantiate_node(SyntaxNode,input, index...(index + 7))
+      @index += 7
+    else
+      terminal_parse_failure('Quarter')
+      r1 = nil
+    end
+    if r1
+      r0 = r1
+    else
+      if has_terminal?('Quart', false, index)
+        r2 = instantiate_node(SyntaxNode,input, index...(index + 5))
+        @index += 5
+      else
+        terminal_parse_failure('Quart')
+        r2 = nil
+      end
+      if r2
+        r0 = r2
+      else
+        @index = i0
+        r0 = nil
+      end
+    end
+
+    node_cache[:quart][start_index] = r0
+
+    r0
+  end
+
+  def _nt_trimest
+    start_index = index
+    if node_cache[:trimest].has_key?(index)
+      cached = node_cache[:trimest][index]
+      @index = cached.interval.end if cached
+      return cached
+    end
+
+    i0 = index
+    if has_terminal?('Trimester', false, index)
+      r1 = instantiate_node(SyntaxNode,input, index...(index + 9))
+      @index += 9
+    else
+      terminal_parse_failure('Trimester')
+      r1 = nil
+    end
+    if r1
+      r0 = r1
+    else
+      if has_terminal?('Trimest', false, index)
+        r2 = instantiate_node(SyntaxNode,input, index...(index + 7))
+        @index += 7
+      else
+        terminal_parse_failure('Trimest')
+        r2 = nil
+      end
+      if r2
+        r0 = r2
+      else
+        @index = i0
+        r0 = nil
+      end
+    end
+
+    node_cache[:trimest][start_index] = r0
 
     r0
   end
