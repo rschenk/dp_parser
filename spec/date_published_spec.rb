@@ -37,6 +37,7 @@ KOOKY_DATES    = [ ['1962 1st Semester',        {:year => 1962, :month => 9,  :d
                    ['1978 2d Quart',            {:year => 1978, :month => 10, :day => 1, :season => true}],
                    ['1978 3d Quart',            {:year => 1978, :month => 1,  :day => 1, :season => true}],
                    ['1978 4th Quart',           {:year => 1978, :month => 4,  :day => 1, :season => true}]]
+INVALID_DATES    = ['1999 Apr 31'] # PMID 10379674
 
 describe DatePublishedParser do
   before(:all) do
@@ -95,11 +96,29 @@ describe DatePublishedParser do
   end
   
   describe '#to_date' do
-    (ABSOLUTE_DATES + DATE_RANGES).each do |date, expected_return_fields|
+    (ABSOLUTE_DATES + DATE_RANGES + KOOKY_DATES).each do |date, expected_return_fields|
       
       it "should parse #{date.inspect} into #{pretty_print_date expected_return_fields}" do
         h = expected_return_fields
         @parser.parse(date).to_date.should == Date.new(h[:year], h[:month] || 1, h[:day] || 1)
+      end
+      
+    end
+  end
+  
+  describe '#valid?' do
+    (ABSOLUTE_DATES + DATE_RANGES + KOOKY_DATES).each do |date, expected_return_fields|
+      
+      it "#{date.inspect} should be valid" do
+        @parser.parse(date).should be_valid
+      end
+      
+    end
+    
+    INVALID_DATES.each do |date|
+      
+      it "#{date.inspect} should not be valid" do
+        @parser.parse(date).should_not be_valid
       end
       
     end

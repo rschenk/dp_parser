@@ -1,8 +1,8 @@
 grammar DatePublished
   rule date
-    date_range    { def to_date; f = to_h; Date.new(f[:year], f[:month] || 1, f[:day] || 1); end; def season?; to_h.has_key?(:season); end }
+    date_range    { def to_date; f = to_h; Date.new(f[:year], f[:month] || 1, f[:day] || 1); end; def valid?; self.to_date; true; rescue; false; end; def season?; to_h.has_key?(:season); end }
     /
-    absolute_date { def to_date; f = to_h; Date.new(f[:year], f[:month] || 1, f[:day] || 1); end; def season?; to_h.has_key?(:season); end }
+    absolute_date { def to_date; f = to_h; Date.new(f[:year], f[:month] || 1, f[:day] || 1); end; def valid?; self.to_date; true; rescue; false; end; def season?; to_h.has_key?(:season); end }
   end
   
   rule date_range
