@@ -90,6 +90,8 @@ Notice that when you call to_h, it only fills out the fields that it knows. In t
 
 However, when you call in to_date, it will fill in the missing fields. The month defaults to Jan, and the day defaults to 1. Just like the Ruby Date object. (Imagine that!)
 
+One special thing to note is the _.valid?_ method. If for some reason you've got a date like "1999 Apr 31", it will parse correctly, but Ruby will freak out when trying to make a Date object, because that Date doesn't exist. You can use the _.valid?_ method to check for this case.
+
 ## Note on Patches/Pull Requests
  
 * Fork the project.
