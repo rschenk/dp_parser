@@ -9,11 +9,11 @@ module DatePublished
   end
 
   module Date0
-    def to_date; f = to_h; Date.new(f[:year], f[:month] || 1, f[:day] || 1); end; def season?; to_h.has_key?(:season); end
+    def to_date; f = to_h; Date.new(f[:year], f[:month] || 1, f[:day] || 1); end; def valid?; self.to_date; true; rescue; false; end; def season?; to_h.has_key?(:season); end
   end
 
   module Date1
-    def to_date; f = to_h; Date.new(f[:year], f[:month] || 1, f[:day] || 1); end; def season?; to_h.has_key?(:season); end
+    def to_date; f = to_h; Date.new(f[:year], f[:month] || 1, f[:day] || 1); end; def valid?; self.to_date; true; rescue; false; end; def season?; to_h.has_key?(:season); end
   end
 
   def _nt_date
